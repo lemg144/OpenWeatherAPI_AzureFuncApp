@@ -11,7 +11,7 @@ from azure.storage.blob import BlobServiceClient
 app = func.FunctionApp()
 
 @app.function_name(name="mytimer")
-@app.timer_trigger(schedule="*/10 * * * * *", arg_name="mytimer", run_on_startup=False, # Schedule NCRONTab expression to run every 5 minutes 0 */5 * * * *
+@app.timer_trigger(schedule="0 */5 * * * *", arg_name="mytimer", run_on_startup=False, # Schedule NCRONTab expression to run every 5 minutes 0 */5 * * * *
               use_monitor=False)
 
 def main(mytimer: func.TimerRequest) -> None: # Runs this function whenever there's a time trigger. 
