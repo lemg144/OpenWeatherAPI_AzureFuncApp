@@ -3,9 +3,9 @@ import json
 import os
 import requests
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 import azure.functions as func
-from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from azure.storage.blob import BlobServiceClient
 
 
 app = func.FunctionApp()
@@ -32,6 +32,8 @@ def main(mytimer: func.TimerRequest) -> None: # Runs this function whenever ther
     # Upload data blob to container
     upload_data_blob(storage_connection_string, container_name, blob_name, data)
 
+    logging.info("Weather data collection and storage completed successfully")
+
 
 def get_ow_data(api_key, lat, lon):
     url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}'
@@ -56,9 +58,9 @@ def upload_data_blob(storage_connection_string, container_name, blob_name, data)
     # Upload the data to the Blob Storage
     try:
         blob_client.upload_blob(data, overwrite=True)
-        print(f'Blob named {blob_name} uploaded successfully.')
+        logging.info(f'Blob named {blob_name} uploaded successfully.')
     except Exception as e:
-        print(f'Error uploading blob: {e}')
+        logging.error(f'Error uploading blob: {e}')
 
 CONFIG = {
     'api_key': os.getenv('API_KEY'),
@@ -71,11 +73,7 @@ CONFIG = {
 def validate_config(config: Dict[str, Any]) -> bool:
     required_keys = ['api_key', 'lat', 'lon', 'storage_connection_string', 'container_name']
 
-    return all(config.get(key) for key in required_keys) # Returns False if the dictionary is incomplete.
-
-if __name__ == '__main__':
-    print(all(CONFIG.get(key) for key in CONFIG))
-
+    return all(config.get(key) for key in required_keys) # Checks CONFIG dictionary and returns False if it is incomplete.
 
 # import datetime
 # import json
