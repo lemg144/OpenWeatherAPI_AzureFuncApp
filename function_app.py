@@ -53,12 +53,9 @@ def upload_data_blob(storage_connection_string, container_name, blob_name, data)
         print(f'Error uploading blob: {e}')
 
 
-# api_key = 'd2fa0cfc469ae15fd4b9141c5e4ab631'
 api_key = os.getenv('API_KEY')
 lat = '-33.437778'
 lon = '-70.650278'
-# storage_connection_string = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1"  # Connection string for Azurite
-# container_name = "mycontainer"
 storage_connection_string = os.getenv('STORAGE_CONNECTION_STRING')
 container_name = os.getenv('CONTAINERNAME')
 
