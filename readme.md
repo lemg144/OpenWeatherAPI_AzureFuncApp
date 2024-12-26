@@ -11,7 +11,7 @@ An Azure Function that periodically collects weather data from OpenWeatherMap AP
 
 ## Prerequisites
 
-- Python 3.8 or higher
+- Python 3.9 or higher
 - Azure Functions Core Tools
 - Azure Storage Account
 - OpenWeatherMap API key
@@ -32,13 +32,13 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Create a `local.settings.json` file with the following structure:
+The `local.settings.json` file should have the following structure:
 
 ```json
 {
     "IsEncrypted": false,
     "Values": {
-        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "AzureWebJobsStorage": "",
         "FUNCTIONS_WORKER_RUNTIME": "python",
         "API_KEY": "your_openweathermap_api_key",
         "STORAGE_CONNECTION_STRING": "your_storage_connection_string",
