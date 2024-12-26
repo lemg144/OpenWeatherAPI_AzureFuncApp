@@ -31,7 +31,7 @@ def main(mytimer: func.TimerRequest) -> None: # Runs this function whenever ther
 
     # Upload data blob to container
     upload_data_blob(storage_connection_string, container_name, blob_name, data)
-
+    
     logging.info("Weather data collection and storage completed successfully")
 
 
